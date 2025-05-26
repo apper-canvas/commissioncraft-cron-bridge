@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import MainFeature from '../components/MainFeature'
 import ApperIcon from '../components/ApperIcon'
 
@@ -73,13 +74,15 @@ const Home = () => {
                   className="w-4 h-4 sm:w-5 sm:h-5 text-surface-700 dark:text-surface-200" 
                 />
               </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="hidden sm:block px-4 py-2 lg:px-6 lg:py-3 bg-gradient-to-r from-primary to-primary-dark text-white rounded-xl font-medium shadow-soft hover:shadow-neon transition-all duration-300"
-              >
-                Get Started
-              </motion.button>
+              <Link to="/dashboard">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="hidden sm:block px-4 py-2 lg:px-6 lg:py-3 bg-gradient-to-r from-primary to-primary-dark text-white rounded-xl font-medium shadow-soft hover:shadow-neon transition-all duration-300"
+                >
+                  Get Started
+                </motion.button>
+              </Link>
             </div>
           </div>
         </div>
@@ -110,11 +113,38 @@ const Home = () => {
               The most powerful affiliate marketing platform for managing partners, tracking commissions, and scaling your business growth.
             </motion.p>
 
-            {/* Stats Grid */}
+            {/* CTA Buttons */}
             <motion.div 
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 sm:mb-16"
+            >
+              <Link to="/dashboard">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white rounded-xl font-medium shadow-soft hover:shadow-neon transition-all duration-300"
+                >
+                  Launch Dashboard
+                </motion.button>
+              </Link>
+              <Link to="/affiliates">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-surface-700 dark:text-white rounded-xl font-medium hover:bg-white/20 transition-all duration-300"
+                >
+                  Manage Affiliates
+                </motion.button>
+              </Link>
+            </motion.div>
+
+            {/* Stats Grid */}
+            <motion.div 
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4 }}
               className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16"
             >
               {stats.map((stat, index) => (
@@ -236,11 +266,16 @@ const Home = () => {
             <div>
               <h4 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Product</h4>
               <ul className="space-y-2 sm:space-y-3">
-                {['Features', 'Pricing', 'API', 'Integrations'].map((item, index) => (
+                {[
+                  { name: 'Dashboard', path: '/dashboard' },
+                  { name: 'Affiliates', path: '/affiliates' },
+                  { name: 'Programs', path: '/programs' },
+                  { name: 'Links', path: '/links' }
+                ].map((item, index) => (
                   <li key={index}>
-                    <a href="#" className="text-surface-300 hover:text-white transition-colors duration-200">
-                      {item}
-                    </a>
+                    <Link to={item.path} className="text-surface-300 hover:text-white transition-colors duration-200">
+                      {item.name}
+                    </Link>
                   </li>
                 ))}
               </ul>
