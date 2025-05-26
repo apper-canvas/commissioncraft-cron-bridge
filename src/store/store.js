@@ -12,6 +12,3 @@ export const store = configureStore({
     commissions: commissionsReducer
   }
 })
-
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
